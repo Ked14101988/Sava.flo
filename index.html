@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SAVA.flo — Цветы в Бородянке</title>
+  <meta name="description" content="SAVA.flo — цветочный магазин в Бородянке (Киевская область). Букеты на заказ, упаковка, открытки, доставка и самовывоз." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#12141b;
+      --muted:#a9b0c0;
+      --text:#f3f5fb;
+      --accent:#76f2b3;
+      --accent2:#ff7ad9;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(118,242,179,.20), transparent 55%),
+        radial-gradient(1000px 600px at 95% 10%, rgba(255,122,217,.15), transparent 55%),
+        linear-gradient(180deg, #090a0f, #0b0c10 40%, #07080c);
+      color:var(--text);
+      line-height:1.4;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,12,16,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      max-width:var(--max); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 22px;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.3px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:14px;
+      background: conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent));
+      box-shadow: 0 10px 30px rgba(118,242,179,.12);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 40%);
+      transform: rotate(18deg);
+    }
+    .nav-links{display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end}
+    .nav-links a{
+      padding:10px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      border:1px solid transparent;
+      transition:.2s ease;
+      font-weight:650;
+    }
+    .nav-links a:hover{color:var(--text); border-color:var(--line); background:rgba(255,255,255,.03)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      border-radius:999px; padding:12px 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      transition:.2s ease;
+      cursor:pointer;
+      font-weight:800;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.06)}
+    .btn.primary{
+      border-color: rgba(118,242,179,.35);
+      background: linear-gradient(135deg, rgba(118,242,179,.22), rgba(255,122,217,.12));
+      box-shadow: 0 12px 30px rgba(118,242,179,.08);
+    }
+    .btn.small{padding:10px 12px; font-weight:800}
+    .card{
+      background: rgba(18,20,27,.78);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero{
+      padding:40px 0 14px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr; padding-top:22px}
+    }
+    .hero-left{padding:28px}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: rgba(255,255,255,.03);
+      font-weight:700;
+      font-size:13px;
+    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--accent)}
+    h1{margin:14px 0 10px; font-size:44px; line-height:1.05}
+    @media (max-width: 520px){h1{font-size:34px}}
+    .sub{color:var(--muted); font-size:16px; max-width:62ch}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .badge{
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+
+    .hero-right{
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height: 320px;
+    }
+    .hero-photo{
+      height:100%;
+      border-radius: 18px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(700px 420px at 30% 20%, rgba(255,122,217,.25), transparent 60%),
+        radial-gradient(600px 360px at 70% 70%, rgba(118,242,179,.25), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:22px;
+    }
+    .hero-photo strong{font-size:18px}
+    .hero-photo p{margin:8px 0 0; color:var(--muted); font-size:14px}
+
+    .section{padding:16px 0}
+    .section h2{margin:0 0 10px; font-size:26px}
+
+    .grid3{
+      display:grid; grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){.grid3{grid-template-columns:1fr}}
+
+    .mini{padding:18px}
+    .mini h3{margin:0 0 6px; font-size:16px}
+    .mini p{margin:0; color:var(--muted); font-size:14px}
+
+    .split{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+    }
+    @media (max-width: 900px){.split{grid-template-columns:1fr}}
+
+    form{display:grid; gap:10px}
+    input, textarea, select{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      padding:12px 12px;
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:110px; resize:vertical}
+    .fine{font-size:12px; color:var(--muted)}
+    .row{display:flex; justify-content:space-between; align-items:center; gap:10px}
+    .map{
+      border-radius: 18px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      height: 320px;
+      background: rgba(255,255,255,.02);
+    }
+    iframe{width:100%; height:100%; border:0}
+    footer{
+      padding:26px 0 40px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      margin-top: 14px;
+    }
+    .toast{
+      position:fixed; right:16px; bottom:16px;
+      background: rgba(18,20,27,.92);
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:12px 14px;
+      box-shadow: var(--shadow);
+      display:none;
+      max-width: 360px;
+    }
+    .toast strong{display:block; margin-bottom:4px; color:var(--text)}
+    .link-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      font-weight:750;
+    }
+    .link-pill:hover{background: rgba(255,255,255,.06)}
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>SAVA.flo</div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">О нас</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#order" class="btn small primary">Заказать</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card hero-left">
+        <div class="kicker"><span class="dot"></span> Бородянка • Киевская область</div>
+        <h1>Цветы, которые попадают в сердце</h1>
+        <p class="sub">
+          <b>SAVA.flo</b> — цветочный магазин в Бородянке. Собираем букеты под повод и бюджет,
+          делаем аккуратную упаковку и добавляем открытку по желанию.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#order">Оформить заказ</a>
+          <a class="btn" href="#contacts">Связаться</a>
+        </div>
+
+        <div class="badges">
+          <div class="badge">Букеты под запрос</div>
+          <div class="badge">Открытка к букету</div>
+          <div class="badge">Самовывоз / доставка*</div>
+        </div>
+
+        <p class="fine" style="margin-top:10px">
+          *Если доставки нет — просто убери пункт или уточни условия (по Бородянке/в окрестности).
+        </p>
+      </div>
+
+      <div class="card hero-right">
+        <div class="hero-photo">
+          <div>
+            <strong>Добавь сюда фото ваших букетов</strong>
+            <p>Можно заменить этот блок на изображение или слайдер.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <h2>Что делаем</h2>
+      <div class="grid3">
+        <div class="card mini">
+          <h3>Букеты</h3>
+          <p>Классика, сезонные миксы, “как на фото”, индивидуальные композиции.</p>
+        </div>
+        <div class="card mini">
+          <h3>Оформление</h3>
+          <p>Упаковка, ленты, коробки, открытки, стиль под повод.</p>
+        </div>
+        <div class="card mini">
+          <h3>Быстрое согласование</h3>
+          <p>Пишем в мессенджер, уточняем детали и подтверждаем заказ.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTS + ORDER -->
+    <section id="contacts" class="section split">
+      <div class="card mini">
+        <h2>Контакты</h2>
+
+        <!-- ЗАМЕНИ ЭТИ ДАННЫЕ -->
+        <p class="fine" style="margin:0 0 10px">Замените на ваши реальные:</p>
+
+        <div style="display:grid; gap:10px">
+          <div><span class="fine">Адрес:</span><br><b>Бородянка, Киевская область</b> (уточни улицу/номер)</div>
+          <div><span class="fine">График:</span><br><b>Ежедневно 09:00–20:00</b> (пример)</div>
+          <div><span class="fine">Телефон:</span><br><b>+38 (0__) ___ __ __</b></div>
+          <div><span class="fine">Instagram:</span><br><b>@sava.flo</b> (пример)</div>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="link-pill" id="tgLink" href="#" target="_blank" rel="noreferrer">Telegram</a>
+          <a class="link-pill" id="waLink" href="#" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a class="link-pill" id="igLink" href="#" target="_blank" rel="noreferrer">Instagram</a>
+        </div>
+
+        <p class="fine" style="margin-top:12px">
+          Карта ниже — опционально. Вставь точный адрес, и она будет показывать локацию.
+        </p>
+      </div>
+
+      <div id="order" class="card mini">
+        <h2>Быстрый заказ</h2>
+        <form id="orderForm">
+          <div class="row" style="gap:10px">
+            <input name="name" placeholder="Ваше имя" required />
+            <input name="phone" placeholder="Телефон" required />
+          </div>
+
+          <select name="type" required>
+            <option value="" selected>Что нужно?</option>
+            <option>Букет на подарок</option>
+            <option>Букет “как на фото”</option>
+            <option>Композиция в коробке</option>
+            <option>Индивидуальный заказ</option>
+          </select>
+
+          <select name="budget" required>
+            <option value="" selected>Бюджет</option>
+            <option>до 1000 грн</option>
+            <option>1000–2000 грн</option>
+            <option>2000–3000 грн</option>
+            <option>3000+ грн</option>
+          </select>
+
+          <textarea name="details" placeholder="Пожелания: цвет, повод, дата/время, доставка или самовывоз, адрес (если доставка)"></textarea>
+
+          <button class="btn primary" type="submit">Отправить заявку</button>
+          <div class="fine">После отправки откроется мессенджер с готовым текстом.</div>
+        </form>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="section">
+      <h2>Где мы</h2>
+      <div class="map card">
+        <!-- Вставь свой адрес вместо Borodyanka -->
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Бородянка%20Киевская%20область&output=embed">
+        </iframe>
+      </div>
+      <p class="fine">Если хочешь точку магазина — напиши мне улицу и номер, вставлю точный запрос карты.</p>
+    </section>
+
+    <footer>
+      <div class="row" style="flex-wrap:wrap">
+        <div>© <span id="y"></span> SAVA.flo</div>
+        <div>Бородянка, Киевская область</div>
+      </div>
+      <div class="fine" style="margin-top:10px">
+        Сделано как сайт-визитка: контакты, заказ в мессенджер, карта. Можно расширить до каталога/корзины.
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast">
+    <strong id="toastTitle">Готово</strong>
+    <div class="fine" id="toastText"></div>
+  </div>
+
+  <script>
+    // === НАСТРОЙКИ (замени под себя) ===
+    const SETTINGS = {
+      telegramUser: "username",     // без @
+      whatsappPhone: "380000000000", // только цифры, с кодом страны
+      instagramUrl: "https://instagram.com/sava.flo", // ссылка на ваш инст
+    };
+
+    // Links
+    const tgLink = document.getElementById("tgLink");
+    const waLink = document.getElementById("waLink");
+    const igLink = document.getElementById("igLink");
+
+    tgLink.href = `https://t.me/${encodeURIComponent(SETTINGS.telegramUser)}`;
+    waLink.href = `https://wa.me/${encodeURIComponent(SETTINGS.whatsappPhone)}`;
+    igLink.href = SETTINGS.instagramUrl;
+
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Toast
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastText = document.getElementById("toastText");
+    let toastTimer = null;
+
+    function showToast(title, text){
+      toastTitle.textContent = title;
+      toastText.textContent = text || "";
+      toast.style.display = "block";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.style.display = "none", 2400);
+    }
+
+    // Order -> open Telegram with prefilled text (можно поменять на WhatsApp)
+    const form = document.getElementById("orderForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+
+      const msg =
+`SAVA.flo — заявка на букет 💐
+Имя: ${fd.get("name")}
+Телефон: ${fd.get("phone")}
+Тип: ${fd.get("type")}
+Бюджет: ${fd.get("budget")}
+Детали: ${(fd.get("details") || "").trim()}`.trim();
+
+      const url = `https://t.me/${encodeURIComponent(SETTINGS.telegramUser)}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+      showToast("Заявка готова", "Открыл Telegram с текстом заказа.");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
